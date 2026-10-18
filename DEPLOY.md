@@ -44,16 +44,20 @@ location /api/ { proxy_pass http://api-host.internal:3002; }
 location / { root /srv/demo/dist; try_files $uri /index.html; }
 ```
 
-**Vercel** (`vercel.json` in `demo/`)
+**Vercel** (`vercel.json` in `demo/` — committed)
 
 ```json
 {
   "rewrites": [
-    { "source": "/api/:path*", "destination": "https://api-host/:path*" },
+    { "source": "/api/:path*", "destination": "https://api.useclymb.com/api/:path*" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
 ```
+
+The first rule proxies the demo's same-origin `/api/v1/...` calls to the
+production API; the second is the SPA fallback so `/<brand>?k=<token>`
+links load the app (Vercel still serves real files from `dist` first).
 
 ## Local testing (why Vite mentions a proxy)
 
