@@ -88,7 +88,6 @@ const Shell = ({ demo }: { demo: DemoBrandPublic }) => {
           defaultCountry={demo.country}
           plans={demo.claim_plans}
           onClose={claim.close}
-          onDone={claim.markClaimed}
         />
       )}
     </div>

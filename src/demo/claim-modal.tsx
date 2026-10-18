@@ -41,16 +41,12 @@ export const useClaimController = ({ demo, slug, token, onClaimed }: UseClaimOpt
   }, [slug, token]);
 
   const close = useCallback(() => setOpen(false), []);
-  const markClaimed = useCallback(() => {
-    setOpen(false);
-    setClaimed(true);
-  }, []);
 
   useEffect(() => {
     if (claimed && onClaimed) onClaimed();
   }, [claimed, onClaimed]);
 
-  return { open, openDialog, close, claimed, markClaimed };
+  return { open, openDialog, close, claimed };
 };
 
 export const ClaimModal = ({
@@ -59,14 +55,12 @@ export const ClaimModal = ({
   defaultCountry,
   plans,
   onClose,
-  onDone,
 }: {
   slug: string;
   token: string;
   defaultCountry: string;
   plans: DemoClaimPlan[];
   onClose: () => void;
-  onDone: () => void;
 }) => {
   const [email, setEmail] = useState('');
   const [country, setCountry] = useState(defaultCountry);
@@ -92,18 +86,13 @@ export const ClaimModal = ({
     setSubmitting(true);
     try {
       const init = await initializeClaim(slug, token, email, country.trim());
-      if (init.provider === 'simulated' || !init.authorization_url) {
-        const verified = await verifyClaim(slug, token, init.reference);
-        if (verified.success) {
-          onDone();
-          return;
-        }
-        toast.error('Could not verify the payment. Try again.');
+      if (!init.authorization_url) {
+        toast.error('Could not start the checkout. Try again.');
         setSubmitting(false);
         return;
       }
-      // Real provider: hand off to the hosted payment page; the demo app
-      // picks up on return via ?claim=verify&reference=…
+      // Hand off to the hosted payment page; the demo app picks up on return
+      // via ?claim=verify&reference=…
       window.location.href = init.authorization_url;
       return;
     } catch (error) {
