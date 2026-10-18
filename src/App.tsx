@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import {
   BrowserRouter,
-  Navigate,
   Route,
   Routes,
   useLocation,
@@ -10,6 +9,7 @@ import {
 
 import { DemoProvider } from './demo/demo-context';
 import { DemoLayout, NotFound } from './demo/layout';
+import Landing from './demo/landing';
 import AgentPage from './demo/pages/agent';
 import OrdersRedirect from './demo/orders-redirect';
 import OverviewPage from './demo/pages/overview';
@@ -30,7 +30,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/not-found" replace />} />
+        <Route path="/" element={<Landing />} />
         <Route path="/not-found" element={<NotFound />} />
         <Route
           path=":slug"
