@@ -42,10 +42,10 @@ export default function Landing() {
       </section>
 
       <section className="mx-auto w-full max-w-[80rem] px-6 pb-20 lg:pb-24">
-        <div className="overflow-hidden border border-border bg-black">
+        <div className="overflow-hidden border border-border bg-background">
           <img
-            src="/dashboard.png"
-            alt="The Clymb Mission Control dashboard"
+            src="/store.png"
+            alt="The Clymb Store page, showing a product catalog"
             className="block w-full"
           />
         </div>
