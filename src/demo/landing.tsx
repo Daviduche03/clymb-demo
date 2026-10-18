@@ -45,7 +45,7 @@ export default function Landing() {
         <div className="overflow-hidden border border-border bg-background">
           <img
             src="/store.png"
-            alt="The Clymb Store page, showing a product catalog"
+            alt="The Clymb Store overview, showing storefront settings and revenue analytics"
             className="block w-full"
           />
         </div>
