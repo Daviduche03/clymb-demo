@@ -10,6 +10,7 @@ import {
 import { DemoProvider } from './demo/demo-context';
 import { DemoLayout, NotFound } from './demo/layout';
 import Landing from './demo/landing';
+import PayPage from './demo/pay';
 import AgentPage from './demo/pages/agent';
 import OrdersRedirect from './demo/orders-redirect';
 import OverviewPage from './demo/pages/overview';
@@ -31,6 +32,7 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Landing />} />
+        <Route path="/pay/:slug" element={<PayPage />} />
         <Route path="/not-found" element={<NotFound />} />
         <Route
           path=":slug"
